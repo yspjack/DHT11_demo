@@ -1,7 +1,6 @@
-#include <reg52.h>
+#include <mcs51/8051.h>
 #include "LCD1602.h"
-#include <intrins.h>
-
+#define _nop_() __asm nop __endasm
 //16x2
 static unsigned char cur_x = 0, cur_y = 0;
 

@@ -1,10 +1,10 @@
 //STC12C5A60S2
 //11.0592MHz
-#include <reg51.h>
-#include <intrins.h>
-#include <LCD1602.h>
+#include <mcs51/stc12.h>
+#include "LCD1602.h"
 #include <stdio.h>
-sbit DHT = P1 ^ 1;
+#define DHT P1_1
+#define _nop_() __asm nop __endasm
 void delay(unsigned int k)
 {
     unsigned char i, j;
@@ -32,7 +32,7 @@ unsigned char getByte()
     for(i = 0; i < 8; ++i)
     {
         timer = 1;
-        while(!DHT && (++timer));//50 微秒的低电平
+        while(DHT==0 && (++timer));//50 微秒的低电平
         Delay10us();
         Delay10us();
         Delay10us();
@@ -41,7 +41,7 @@ unsigned char getByte()
         ret |= DHT;
 
         timer = 1;
-        while(DHT && (++timer));//等待高电平结束
+        while(DHT==1 && (++timer));//等待高电平结束
 
     }
     return ret;
@@ -67,9 +67,9 @@ void communicate()
     if(DHT == 0)
     {
         timer = 1;
-        while(!DHT && (++timer));
+        while(DHT==0 && (++timer));
         timer = 1;
-        while(DHT && (++timer));
+        while(DHT==1 && (++timer));
         RH_H = getByte();
         RH_L = getByte();
         temp_H = getByte();
