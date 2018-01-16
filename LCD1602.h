@@ -4,11 +4,11 @@
 #define uchar unsigned char
 #define uint unsigned int
 
-//LCD1602数据端口
+//LCD1602鏁版嵁绔彛
 #define DataPort P2
-sbit LCM_RS = P0 ^ 7; //LCD1602命令端口
-sbit LCM_RW = P0 ^ 6; //LCD1602命令端口
-sbit LCM_EN = P0 ^ 5; //LCD1602命令端口
+sbit LCM_RS = P0 ^ 7; //LCD1602鍛戒护绔彛
+sbit LCM_RW = P0 ^ 6; //LCD1602鍛戒护绔彛
+sbit LCM_EN = P0 ^ 5; //LCD1602鍛戒护绔彛
 
 extern void init_LCD1602();
 extern void DisplayReset();
